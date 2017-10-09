@@ -1,0 +1,89 @@
+%&LaTeX (use LaTeX format)
+\documentclass[oneside,a4paper,12pt]{article}
+
+% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+% 'Packages' utilizadas (Não Alterar)
+% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+\usepackage[a4paper,top=3cm,bottom=3cm, left=2cm,right=2cm]{geometry}
+\usepackage{fancyhdr,lastpage}
+\usepackage{graphics}
+\usepackage{graphicx}
+\usepackage[brazilian]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+% Definição dos parâmetros de entrada (Alterar)
+% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+% DADOS UnB
+\newcommand{\UnBunidade}{Faculdade UnB Gama} % Unidade
+\newcommand{\UnBsubunidade}{Engenharia de Energia} % Subunidade
+
+%%% DADOS PROFESSOR
+\newcommand{\ProfessorNome}{Jorge Andrés Cormane Angarita} % Assinatura final 
+\newcommand{\UnBcargo}{Coordenação de Engenharia de Energia} % Cargo
+\newcommand{\UnBfuncao}{Coordenador de Engenharia de Energia} % Funcao
+
+\newcommand{\UnBSEI}{23106.125720/2017-51} % UnBDoc
+
+\renewcommand{\baselinestretch}{1.5} 
+
+% Início do documento
+% ~~~~~~~~~~~~~~~~~~~
+\begin{document}
+
+% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+% Definição do cabeçalho e do rodapé (Não Alterar)
+% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+\pagestyle{fancy} % Definicao Cabeçalho
+\fancyhead[L]{  
+    \begin{picture}(0,0)
+\put(0,0){\includegraphics{as_bas_CONT.eps}}
+    \end{picture}
+} % Logo Cabeçalho DER
+
+\fancyhead[R]{\UnBunidade \\ \UnBsubunidade} % Texto Cabeçalho ESQ
+\fancyfoot[C]{REF. SEI \UnBSEI \hfill \thepage/\pageref{LastPage}} % Texto Rodape Central
+
+\renewcommand{\headrulewidth}{0.4pt} % Linhas Cabeçalho
+\renewcommand{\footrulewidth}{0.4pt} % Linhas Rodape
+
+% ~~~~~~~~~~~~~~~~~~~~~~~~
+% Documento (Não Alterar)
+% ~~~~~~~~~~~~~~~~~~~~~~~~
+
+\hfill
+
+\begin{flushright} \today \end{flushright} % Data
+
+\noindent \textbf{Para:} Colegiado Acadêmico da FGA\\
+
+\noindent \textbf{Assunto:} Parecer sobre o projeto de pesquisa  X\\  
+
+\begin{center} {\Huge PARECER} \end{center}
+
+O projeto de pesquisa e desenvolvimento intitulado
+
+
+Portanto, com base na informação fornecida, sou de parecer favorável 
+
+\hfill
+
+\begin{center}
+\begin{tabular}{c}
+\includegraphics[scale=0.75]{assinatura.pdf} \\
+\hline 
+\textbf{Prof. \ProfessorNome} \\ 
+\UnBfuncao
+\end{tabular} 
+\end{center}
+
+
+\end{document}
+
+%
+
+%Para este relator, isto representa um não comprometimento com o cumprimento do plano de estudos estabelecido. 
+%Observou-se também que não foi apresentada qualquer documentação comprobatória 
