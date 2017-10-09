@@ -1,0 +1,198 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{tikz}
+
+\usepackage[american]{circuitikz}
+\title{circuits}
+\author{yan.rsousa }
+\date{March 2017}
+
+\begin{document}
+    \begin{circuitikz}
+      \draw (0,4)
+      to[american voltage source=$V_s$, i=$i_s$] (0,0) % The voltage source
+     to[short](4,0);
+
+\draw(0,4)
+to[switch=$s_1$](4,4)
+to[L=$V_L$, i=$i_L$](4,0);
+      
+      
+    
+      \draw (8,4)
+    to[D*=$D$](4,4);
+
+     \draw(8,0)
+    to [short](12,0)
+    to[european resistor, l_=$V_o$, i=$i_o$] (12,4)
+    to[short](8,4);
+  
+    
+    
+     \draw(8,4)
+     to[C=$V_C$, i=$i_C$] (8,0)
+     to[short] (4,0);
+      
+     
+       
+   \end{circuitikz}
+
+\vspace{5cm}
+    \begin{circuitikz}
+      \draw (0,4)
+      to[american voltage source=$V_s$, i=$i_s$] (0,0) % The voltage source
+     to[short](4,0);
+
+\draw(0,4)
+to[short](4,4)
+to[L=$V_L$, i=$i_L$](4,0);
+      
+      
+    
+      \draw (8,4)
+    to[open](4,4);
+
+     \draw(8,0)
+    to [short](12,0)
+    to[european resistor, l_=$V_o$, i=$i_o$] (12,4)
+    to[short](8,4);
+  
+    
+    
+     \draw(8,4)
+     to[C=$V_C$, i=$i_C$] (8,0)
+     to[short] (4,0);
+      
+     
+       
+   \end{circuitikz}
+   
+   
+   \vspace{10cm}
+
+    \begin{circuitikz}
+      \draw (0,4)
+      to[american voltage source=$V_s$, i=$i_s$] (0,0) % The voltage source
+     to[short](4,0);
+
+\draw(0,4)
+to[open](4,4)
+to[L=$V_L$, i=$i_L$](4,0);
+      
+      
+    
+      \draw (8,4)
+    to[short](4,4);
+
+     \draw(8,0)
+    to [short](12,0)
+    to[european resistor, l_=$V_o$, i=$i_o$] (12,4)
+    to[short](8,4);
+  
+    
+    
+     \draw(8,4)
+     to[C=$V_C$, i=$i_C$] (8,0)
+     to[short] (4,0);
+      
+     
+       
+   \end{circuitikz}
+   \vspace{5cm}
+    \begin{circuitikz}
+      \draw (4,0)
+      to[short](0,0)
+      to[american current source=$V_s$, i=$I_{pv}$] (0,4) % The voltage source
+     to[short](4,4);
+
+\draw(4,4)
+to[D*=$D$,i=$I_D$](4,0);
+      
+      
+    
+      \draw (8,4)
+    to[short](4,4);
+
+     \draw(8,0)
+     node[ocirc] (A) at (12,4) {}
+ node[ocirc] (B) at (12,0) {}
+    to [short](12,0)
+    to[open, l_=$V$] (12,4);
+    
+    \draw(8,4)
+    to[R=$R_s$, i=$I$](12,4);
+
+  
+    
+    
+     \draw(8,4)
+     to[R=$R_{sh}$] (8,0)
+     to[short] (4,0);
+      
+     
+       
+   \end{circuitikz} 
+   
+   
+   
+   
+   
+    \begin{circuitikz}
+      \draw (2,0)
+      to[short](0,0)
+      to[american current source=$V_s$, i=$I_{pv}$] (0,4) % The voltage source
+     to[short](2,4);
+
+\draw(2,4)
+to[D*=$D$](2,0);
+      
+      \draw [dashed] (-1.5,-1) -- (5,-1) -- (5,5)--node[anchor=south west] {Módulo PV} (-1.5,5) -- (-1.5,-1) ;
+
+          \draw[dashed] (6.5,-1) -- (13.5,-1) -- (13.5,5) --node[anchor=south west] {Conversor Buck-Boost} (6.5,5) -- (6.5,-1);
+
+    
+    \draw(2,4)
+    to[R=$R_s$,](6,4);
+
+  
+    
+    
+     \draw(4,4)
+     to[open] (4,0)
+     to[short] (2,0);
+      
+     
+
+      \draw (6,4)
+      to[C, l_=$C_1$] (6,0) % The voltage source
+     to[short](8,0);
+
+\draw(6,4)
+to[switch=$s_1$](8,4)
+to[L=$L$](8,0);
+      
+      
+    
+      \draw (10,4)
+    to[D*=$D$](8,4);
+
+     \draw(10,0)
+    to [short](12,0)
+    to[european resistor, l_=$V_o$] (12,4)
+    to[short](10,4);
+  
+    
+    \draw (4,0)
+    to[short](6,0);
+     \draw(10,4)
+     to[C=$C_2$] (10,0)
+     to[short] (8,0);
+      
+     
+       
+   \end{circuitikz}
+   
+   
+   
+
+\end{document}

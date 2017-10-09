@@ -1,0 +1,257 @@
+\documentclass{article}
+
+\usepackage[latin1]{inputenc}
+\usepackage{tikz}
+\usepackage{subcaption} 
+
+\usetikzlibrary{shapes,arrows}
+\begin{document}
+\pagestyle{empty}
+
+
+% Define block styles
+\tikzstyle{decision} = [diamond, draw, 
+    text width=4.5em, text badly centered, node distance=3cm, inner sep=0pt]
+\tikzstyle{block} = [rectangle, draw, , 
+    text width=10em, text centered, rounded corners, minimum height=5em]
+\tikzstyle{line} = [draw, -latex']
+\tikzstyle{cloud} = [draw, ellipse, node distance=3cm,text centered,minimum height=6em,text width=10em,]
+    
+\begin{tikzpicture}[node distance = 2cm, auto]
+    % Place nodes
+    \node [block] (init) {\large Valores de \\Irradi\^ancia e Temperatura};
+    
+    \node [block, below of=init,node distance=2.5cm] (evaluate) {\large Circuito \\Equivalente para o Painel Solar};
+    \node [block, below of=evaluate, node distance=2.5cm] (decide) {\large Algoritmo MPPT};
+    \node [block, below of=decide, node distance=2.5cm] (stop) {\large Conversor Buck-Boost};
+     \node [cloud, below of=stop, node distance=2.5cm] (stop1) {\large Sa\'ida do conversor:\large \\$P_{saida}$, $V_{saida}$, $I_{saida}$};
+    % Draw edges
+    \path [line] (init) -- (evaluate);
+    \path [line] (evaluate) -- (decide);
+    \path [line] (decide) -- (stop);
+    \path [line] (stop) -- (stop1);
+
+\end{tikzpicture}
+
+
+
+
+
+
+\tikzstyle{decision} = [diamond, draw, 
+    text width=5em, text badly centered, node distance=3cm, inner sep=0pt]
+\tikzstyle{block} = [rectangle, draw, , 
+    text width=9em, text centered, rounded corners, minimum height=5em]
+\tikzstyle{line} = [draw, -latex']
+\tikzstyle{cloud} = [draw, ellipse, node distance=3cm,text centered,minimum height=6.5em,text width=5.8em,]
+    
+\begin{tikzpicture}[node distance = 2cm, auto]
+    % Place nodes
+    \node [block] (init) {\large Curvas reais de irradi\^ancia};
+    
+    \node [block, below of=init,node distance=2.5cm] (evaluate) {\large Circuito \\Equivalente para o Painel Solar};
+    
+    
+    \node [block, below of=evaluate, node distance=2.5cm] (decide) {\large Curvas P-V e I-V};
+    
+    \node [block, right of=evaluate, node distance=8cm] (alg) {\large Algoritmo MPPT};
+    
+    \node [cloud, below of=decide, node distance=2.5cm] (stop) {\large Valores de refer\^encia 
+    \\ $V_{mp}, I_{mp}, P_{mp}$};
+     \node [cloud, below of=alg, node distance=5cm] (stop1) {\large Sa\'ida do Algoritmo: $V'_{mp}, I'_{mp}, P'_{mp}$};
+     
+     \node [block, right of=stop, node distance=4cm, minimum height=2cm ] (stop3) {\large Compara\c c\~ao entre os \\resultados};
+    % Draw edges
+    
+    \path [line] (init) -- (evaluate);
+    \path [line] (evaluate) -- (decide);
+    \path [line] (decide) -- (stop);
+    \path [line, dashed] (evaluate)|- (alg);
+    \path [line] (stop)-- (stop3);
+    \path [line, dashed] (stop1)-- (stop3);
+
+    \path [line, dashed] (alg) -- (stop1);
+
+
+\end{tikzpicture}
+
+
+
+
+
+
+\tikzstyle{decision} = [diamond, aspect=2,draw,  text badly centered, node distance=3cm, inner sep=1pt,  ]
+\tikzstyle{block} = [rectangle, draw, 
+    text centered, rounded corners, minimum height=4em]
+\tikzstyle{line} = [draw, -latex']
+\tikzstyle{cloud} = [draw, ellipse, node distance=3cm,text centered,
+    minimum height=4em, text width=6em]
+    
+\begin{tikzpicture}[node distance = 2cm, auto]
+    % Place nodes
+    \node [cloud] (init) {\large In\'icio};
+
+    \node [block, below of=init, text width=10em,] (identify) {\large Mede
+    \\$V_{k}, I_{k}$};
+    \node [block, below of=identify, text width=10em,] (evaluate) {\large Calcular \\ $P_{k} = V_{k} \cdot I_{k}$};
+    
+    \node [decision, below of=evaluate] (decide) {\large $P_{k}>P_{k - 1}$};
+    \node [decision, below of=decide, right of=decide, node distance=4cm ,] (decide2) {\large $V_{k} > V_{k - 1}$};
+    \node [decision, below of=decide, left of=decide, node distance=4cm] (decide1) {\large$V_{k}> V_{k - 1}$};
+    
+    \node [block, below of=decide1, right of=decide1, node distance=2cm] (stop1) {\large Aumenta V};
+    \node [block, below of=decide1, left of=decide1, node distance=2cm] (stop2) {\large Diminui V};
+    \node [block, below of=decide2, right of=decide2, node distance=2cm] (stop3) {\large Aumenta V};
+    \node [block, below of=decide2, left of=decide2, node distance=2cm] (stop4) {\large Diminui V};
+     \node [cloud,  below of =stop1, right of =stop1,node distance=3cm, xshift = -1cm] (return) {\large Retorna};
+     
+    % Draw edges
+    \path [line] (init) -- (identify);
+    \path [line] (identify) -- (evaluate);
+    \path [line] (evaluate) -- (decide);
+    
+    \path [line] (decide) -| node[near end] {Sim}(decide2);
+    \path [line] (decide) -| node [near end] {N\~ao}(decide1);
+      \path [line] (decide1) -| node [near end] {Sim}(stop1);
+      \path [line] (decide1) -| node [near end] {N\~ao}(stop2);
+      \path [line] (decide2) -| node [near end] {N\~ao}(stop3);
+      \path [line] (decide2) -| node [near end] {Sim}(stop4);
+
+
+\path[line] (stop1) |- ([xshift=1.5cm,yshift=-0.5cm]stop2.south)-|(return);
+\path[line] (stop2) |- ([xshift=1.5cm,yshift=-0.5cm]stop2.south)-|(return);
+\path[line] (stop3) |- ([xshift=2cm,yshift=-0.5cm]stop2.south)-|(return);
+
+\path[line] (stop4) |- ([xshift=-2cm,yshift=-0.5cm]stop4.south)-|(return);
+
+
+
+
+
+
+
+\end{tikzpicture}
+
+
+\tikzstyle{decision} = [diamond, aspect=2,draw,  text badly centered, node distance=3cm, inner sep=1pt, text width = 8.5em]
+\tikzstyle{block} = [rectangle, draw, 
+    text centered, rounded corners, minimum height=4em]
+\tikzstyle{line} = [draw, -latex']
+\tikzstyle{cloud} = [draw, ellipse, node distance=3cm,text centered,
+    minimum height=4em, text width=6em]
+    
+\begin{tikzpicture}[node distance = 2cm, auto]
+    % Place nodes
+    
+    \node [cloud, above of=return] (init)
+    {\large In\'icio};
+
+    \node [block, below of=init, text width=11em,] (identify) 
+    {\large Mede\\$V_{k}, I_{k}$};
+    
+    \node [block, below of=identify, text width=11em, minimum height=5em] (evaluate) 
+    {\large Calcular \\$dV = V_{k} - V_{k - 1}$ \\$dI = I_{_{k}} - I_{k - 1}$};
+    
+    \node [decision, below of=evaluate] (decide) {\large $dV = 0$};
+    
+    \node [decision, below of=decide, left of=decide, node distance=3.25cm] (decide2) 
+    {\large $I + V \cdot dI/dV = 0 $};
+    
+    \node [decision, right of=decide2, node distance=6.5cm] (decide1) 
+    {\large$dI = 0 $};
+    
+    \node [decision, below of=decide2, node distance=3cm] (decide3)
+    {\large $I + V \cdot dI/dV > 0 $};
+   
+    \node [decision,  below of=decide1, node distance=3cm] (decide4) {\large $dI > 0 $};
+  
+    \node [block,  below of=decide3,  node distance=3cm, xshift=2cm, text width=2.1cm] (stop2) {\large Aumenta V};
+    
+        \node [block,  left of=stop2, node distance=3cm, xshift= -1cm, text width=2.1cm] (stop1) {\large Diminui V};
+        
+            \node [block,  below of=decide4, node distance=3cm,text width=2.1cm, xshift=-1.9cm] (stop3) {\large Diminui V};
+    
+        \node [block,  right of=stop3, node distance=2.8cm, xshift=1cm, text width=2.1cm] (stop) {\large Aumenta V};
+    
+            \node [cloud,  below of =stop3, right of =stop2,node distance=3cm, xshift = -1.5cm] (return) {\large Retorna};
+
+    % Draw edges
+    \path [line] (init) -- (identify);
+    \path [line] (identify) -- (evaluate);
+    \path [line] (evaluate) -- (decide);
+        \path [line] (decide) -| node [near end] {Sim}(decide1);
+            \path [line] (decide) -|node [near end] {N\~ao} (decide2);
+    \path [line] (decide2) --node [near end] {N\~ao} (decide3);
+        \path [line] (decide1) --node [near end] {N\~ao} (decide4);
+    \path [line] (decide3) -|node [near end] {N\~ao} (stop2);
+        \path [line] (decide3) -|node [near end] {Sim} (stop1);
+\path [line] (decide4) -| node [near end] {N\~ao}(stop3);
+        \path [line] (decide4) -| node [near end] {Sim} (stop);
+
+
+\path[line] (stop1) |- ([xshift=1.5cm,yshift=-0.5cm]stop2.south)-|(return);
+\path[line] (stop) |- ([xshift=2cm,yshift=-0.5cm]stop2.south)-|(return);
+\path[line] (stop3) |- ([xshift=2cm,yshift=-0.5cm]stop2.south)-|(return);
+\path[line] (stop2) |- ([xshift=1.5cm,yshift=-0.5cm]stop2.south)-|(return);
+\path[line] (stop2) |- ([xshift=1.5cm,yshift=-0.5cm]stop2.south)-|(return);
+
+\path[line] (decide1) -- node [near start] {Sim} ([xshift=5cm]decide1.west)-| ([xshift=3cm,yshift=-0.5cm]stop.south west)-|(return);
+
+
+\path[line] (decide2) -- node [near start] {Sim} ([xshift=-1.8cm]decide2.west)|- ([xshift=-3cm,yshift=-0.5cm]stop.south east)-|(return);
+
+
+
+
+
+
+
+
+
+\end{tikzpicture}
+
+
+
+\tikzstyle{decision} = [diamond, draw, 
+    text width=5em, text badly centered, node distance=3cm, inner sep=0pt]
+\tikzstyle{block} = [rectangle, draw, , 
+    text width=5em, text centered, rounded corners, minimum height=5em]
+\tikzstyle{line} = [draw, -latex']
+\tikzstyle{cloud} = [draw, ellipse, node distance=3cm,text centered,minimum height=6.5em,text width=5.8em,]
+    
+\begin{tikzpicture}[node distance = 2cm, auto]
+    % Place nodes
+    \node [block] (init) {\large M\'odulo PV};
+    
+    \node [block, right of=init,text width=3.6em, minimum height=3em, node distance=3cm] (evaluate) {\large Tens\~ao,\\ Corrente};
+     
+    \node [block, right of=evaluate,node distance=3.5cm] (evaluate1) {\large Conversor CC-CC};
+    \node [block, below of=evaluate,  node distance=2.5cm] (decide) {\large Algoritmo MPPT};
+    
+   \node [block, right of =evaluate1, text width=3.5em, minimum height=3em, node distance=3cm] (stop) {\large Pot\^encia};
+   
+    \node [block, right of =decide, text width=4em, minimum height=2em, node distance=3.5cm] (stop1) {\large Ciclo de Trabalho };
+    
+    \node [block, right of =stop,  node distance=3cm] (stop2) {\large Carga};
+    \path [line] (init) -- (evaluate);
+     \path [line] (evaluate) -- (evaluate1);
+    \path [line] (evaluate) -- (decide);
+    \path [line] (decide) -- (stop1);
+    \path [line] (stop1) -- (evaluate1);
+    \path [line] (evaluate1) -- (stop);
+        \path [line] (stop) -- (stop2);
+
+
+
+
+\end{tikzpicture}
+
+
+
+
+
+
+
+
+
+\end{document}
